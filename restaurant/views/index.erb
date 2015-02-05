@@ -1,0 +1,13 @@
+<h1>Current Parties</h1>
+
+<h2>Table Numbers</h2>
+
+<% @current_parties.each do |party| %>
+
+<ul>
+	<li>
+<a href="/parties/<%= party.id %>"> <%= party.table_number %> </a>
+	</li>
+</ul>
+
+<% end %>

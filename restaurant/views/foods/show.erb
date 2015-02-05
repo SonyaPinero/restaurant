@@ -1,0 +1,14 @@
+<h1><%= @food.name %></h1>
+
+<% if @parties != [] %>
+	<% @parties.each do |party| %>
+		<p>Table Number: <%=party.table_number %></p> 
+		<p>Guests: <%= party.guests %></p> 
+		<p>Paid? <%= party.paid %></p> 
+	<% end %>
+
+<% else %>
+	
+	<p>There are currently no parties eating this food. </p> 
+
+<% end %>
