@@ -16,6 +16,13 @@ get '/' do
 end 
 
 
+
+
+########## FOOD FOOD FOOD ##############
+
+
+
+
 get '/foods' do
 	
 	@foods = Food.all 
@@ -27,7 +34,7 @@ end
 
 get '/foods/new' do	
 
-	erb :"foods/form"
+	erb :"foods/new"
 
 end
 
@@ -37,7 +44,7 @@ post '/foods' do
 
 	new_food = Food.create(params[:food])
 
-	redirect to ("foods/#{new_food.id}")
+	redirect to "/foods"
 
 end
 
@@ -90,16 +97,66 @@ end
 
 
 
+
+######## PARTY PARTY PARTY ##########
+
+
+
+
+get '/parties' do 
+
+	@current_parties = Party.all 
+
+	erb :"parties/index"
+
 end
 
+get '/parties/new'	do 
 
-# GET	/parties	Display a list of all parties
-# GET	/parties/:id	Display a single party, options for adding a food item to the party and closing the party.
-# GET	/parties/new	Display a form for a new party
-# POST	/parties	Creates a new party
-# GET	/parties/:id/edit	Display a form for to edit a party's details
-# PATCH	/parties/:id	Updates a party's details
-# DELETE	/parties/:id	Delete a party
+# 	#Display a form for a new party
+
+end
+
+# post '/parties'	
+
+# # Creates a new party
+
+# end
+
+
+get '/parties/:id' do 
+
+	@party = Party.find(params[:id])
+
+	@orders = Order.where(party_id: @party.id)
+
+	erb :"parties/show"
+
+end
+
+#Display a single party, options for adding a food item to the party and closing the party.
+# get	'/parties/:id/edit' do
+
+# 	party = Party.all 
+
+# 	erb :"parties/edit"
+# 	#Display a form for to edit a party's details
+# end
+
+	
+# patch '/parties/:id' do
+# #Updates a party's details
+# end
+
+
+# delete	'/parties/:id' do	
+
+# #Delete a party
+
+# end
+
+end
+
 # POST	/orders	Creates a new order
 # PATCH	/orders/:id	Change item to no-charge
 # DELETE	/orders/:id	Removes an order
