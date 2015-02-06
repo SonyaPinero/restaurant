@@ -9,12 +9,16 @@
 	</li>
 </ul>
 
-<% @orders.each do |order| %>
+<% if @order != nil %>
 
-<ul>
-	<li>
-<a href="orders/<%= order.party_id %>"> Add a new food </a>
-	</li>
-</ul>
+<p><a href="orders/<%= @order.party_id %>"> Add a New Item </a></p>
 
-<% end %> 
+<p><a href="orders/<%= @order.party_id %>/checkout"> Close Table </a></p>
+
+<% else %>
+
+<p>This party has not yet ordered.</p> 
+
+<p><a href="orders/new"> Start Order Here</a></p>
+
+<% end %>

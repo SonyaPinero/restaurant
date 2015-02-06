@@ -1,0 +1,18 @@
+<h2>Add an Order</h2>
+<form action="/orders" method="POST">
+
+  Select a Food: <select name="food[id]">
+    <% @foods.each do |food| %>
+      <option value="<%= food.id %>"><%= food.name %></option>
+    <% end %>
+  </select><br>
+  
+  Select a Party: <select name="party[id]">
+    <% @parties.each do |party| %>
+      <option value="<%= party.id %>">Table Number <%= party.table_number %></option>
+    <% end %>
+  </select><br>
+  
+  <input type="submit" value="Update Order">
+</form>
+

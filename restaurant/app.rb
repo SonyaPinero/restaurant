@@ -111,54 +111,157 @@ get '/parties' do
 
 end
 
+
 get '/parties/new'	do 
 
-# 	#Display a form for a new party
+	erb :"parties/new"
 
 end
 
-# post '/parties'	
 
-# # Creates a new party
+post '/parties'	do
 
-# end
+@new_party = Party.create(params[:party])
+
+redirect to '/parties'
+
+end
 
 
 get '/parties/:id' do 
 
 	@party = Party.find(params[:id])
 
-	@orders = Order.where(party_id: @party.id)
+	@order = Order.where(party_id: @party.id).first
 
 	erb :"parties/show"
 
 end
 
-#Display a single party, options for adding a food item to the party and closing the party.
-# get	'/parties/:id/edit' do
 
-# 	party = Party.all 
+get	'/parties/:id/edit' do
 
-# 	erb :"parties/edit"
-# 	#Display a form for to edit a party's details
-# end
+	@party = Party.find(params[:id])
 
-	
-# patch '/parties/:id' do
-# #Updates a party's details
-# end
-
-
-# delete	'/parties/:id' do	
-
-# #Delete a party
-
-# end
+	erb :"parties/edit"
 
 end
 
-# POST	/orders	Creates a new order
-# PATCH	/orders/:id	Change item to no-charge
-# DELETE	/orders/:id	Removes an order
+	
+patch '/parties/:id' do
+
+party = Party.find(params[:id])
+  	
+  party.update(
+  		table_number: params[:party][:table_number], 
+		guests: params[:party][:guests],
+		paid: params[:party][:paid]
+						)
+
+redirect to "/parties/#{party.id}"
+
+end
+
+
+delete	'/parties/:id' do	
+
+party = Party.find(params[:id])
+  party.destroy
+
+  redirect to '/parties'
+
+end
+
+
+
+
+######## ORDER ORDER ORDER ##########
+
+
+
+
+get '/orders/new' do 
+
+@foods = Food.all
+
+@parties = Party.all
+
+erb :"order/new"
+
+end
+
+
+post '/orders' do 
+
+food_id = params[:food][:id]
+party_id = params[:party][:id]
+
+new_order = Order.create(
+	food_id: food_id,
+	party_id: party_id
+				)
+
+redirect to "/parties/#{party_id}" 
+
+end
+
+
+get '/orders/:id/edit' do 
+
+@order_id = params[:id]
+
+order = Order.find_by(id: params[:id])
+
+party_id = order.party_id 
+
+@party_foods = Party.find(party_id).foods
+@table_number = Party.find(party_id).table_number
+
+erb :"order/edit"
+
+end 
+
+
+patch '/orders/:id' do
+
+food_id = params[:food][:id]
+
+old_order = Order.find_by(id: params[:id])
+
+party_id = old_order.party_id
+
+new_order = old_order.update(
+	food_id: food_id,
+	party_id: party_id
+				)
+
+redirect to "/parties/#{party_id}" 
+
+end
+
+
+delete '/orders/:id' do 
+
+old_order = Order.find(params[:id])
+
+party_id = old_order.party_id
+
+old_order.destroy 
+
+redirect to "/parties/#{party_id}" 
+
+end
+
+
+get '/console' do 
+	Pry.start(binding)
+end
+
+
+
+end
+
+
+
 # GET	/parties/:id/receipt	Saves the party's receipt data to a file. Displays the content of the receipt. Offer the file for download.
 # PATCH	/parties/:id/checkout	Marks the party as paid

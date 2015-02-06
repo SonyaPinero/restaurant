@@ -1,13 +1,11 @@
-<h2>Add a Party/h2>
-<form action="/foods" method="POST">
+<h2>Add a Party</h2>
+<form action="/parties" method="POST">
 
-  Name: <input type="text" name="food[name]"><br>
+  Table_Number: <input type="number" name="party[table_number]"><br>
   
-  Cuisine <input type="text" name="food[cuisine]" value="Tex-Mex"><br>
+  Guests: <input type="number" name="party[guests]" min=0 max=10><br>
   
-  Allergens: <input type="text" name="food[allergens]"><br>
+  Paid: <input type="boolean" name="party[paid]" value="false"><br>
   
-  Price: <input type="number" name="food[price]" min=0 max=10><br>
-  
-  <input type="submit" value="Add!">
+  <input type="submit" value="Create a New Party">
 </form>
