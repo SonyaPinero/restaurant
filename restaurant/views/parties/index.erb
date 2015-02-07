@@ -2,10 +2,13 @@
 
 <% @current_parties.each do |party| %>
 
+<% if party.paid == false %>
 <ul>
 	<li>
 <a href="/parties/<%= party.id %>"> <%= party.table_number %> </a>
 	</li>
 </ul>
+<% end %>
 
 <% end %>
+

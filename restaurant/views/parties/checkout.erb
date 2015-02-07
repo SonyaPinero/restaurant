@@ -1,0 +1,18 @@
+<h2> Check out for Table Number <%= @party.table_number %></h2>
+
+<form action="/parties/<%= @party.id %>/checkout" method="POST">
+  Table Number: <input type="number" name="party[table_number]" value="<%= @party.table_number %>"><br>
+  Guests: <input type="number" name="party[guests]" value="<%= @party.guests %>"><br>
+  Paid: <select name="party[paid]">
+      <option value="<%= @party.paid %>">True</option>
+  		<option value="<%= @party.paid %>">False </option>
+  </select><br>
+ 
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="submit">
+</form>
+
+<form action="/parties/<%= @party.id %>/checkout" method='POST'>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value='Delete Table'>
+</form>

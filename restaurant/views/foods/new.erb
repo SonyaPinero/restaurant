@@ -1,7 +1,11 @@
 <h2>Add a Tex_Mex Food</h2>
 <form action="/foods" method="POST">
 
-  Name: <input type="text" name="food[name]"><br>
+	<% @food.errors.full_messages.each do |message| %>
+		<div class="error"><%= message %></div>
+	<% end %>
+
+  Name: <input type="text" name="food[name]" value="<%= @food.name %>"><br>
   
   Cuisine <input type="text" name="food[cuisine]" value="Tex-Mex"><br>
   

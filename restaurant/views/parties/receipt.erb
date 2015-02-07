@@ -1,0 +1,16 @@
+<h1>Receipt for Table Number <%= @party.table_number %> </h1>
+
+<h2>List of Items</h2>
+
+<% @foods.each do |food| %>
+
+<h3><%= food.name %></h3>
+$<%= food.price %>
+
+<% end %>
+
+
+<h2>Total: $<%= @total %></h2>
+
+
+<a href="/parties/<%= @party.id %>/checkout"> Click here to checkout </a>

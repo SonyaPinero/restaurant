@@ -42,9 +42,13 @@ end
 post '/foods' do
 
 
-	new_food = Food.create(params[:food])
+	@food = Food.new(params[:food])
 
-	redirect to "/foods"
+	if @food.save 
+		redirect to "/foods"
+	else 
+		erb :"foods/new"
+	end
 
 end
 
@@ -173,6 +177,42 @@ party = Party.find(params[:id])
 end
 
 
+get '/parties/:id/receipt' do 
+
+@party = Party.find(params[:id])
+
+@foods = @party.foods
+
+@total = @foods.sum(:price)
+
+erb :"parties/receipt"
+
+end
+
+
+get '/parties/:id/checkout' do
+
+@party = Party.find(params[:id])
+
+erb :"parties/checkout"
+
+end
+
+
+patch '/parties/:id/checkout' do 
+
+party = Party.find(params[:id])
+
+party.update(
+			table_number: params[:party][:table_number], 
+		guests: params[:party][:guests],
+		paid: params[:party][:paid]
+						)
+redirect to '/parties'
+
+end 
+
+
 
 
 ######## ORDER ORDER ORDER ##########
@@ -259,9 +299,11 @@ end
 
 
 
+
+
+
+
 end
 
 
 
-# GET	/parties/:id/receipt	Saves the party's receipt data to a file. Displays the content of the receipt. Offer the file for download.
-# PATCH	/parties/:id/checkout	Marks the party as paid
