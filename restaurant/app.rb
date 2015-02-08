@@ -15,8 +15,25 @@ get '/' do
 
 end 
 
+########## WORK WORK WORK ##############
 
+get '/employees' do
 
+	@employees = Employee.all
+
+	erb :"employees/index"
+
+end 
+
+get '/employees/:id' do
+
+	@employee = Employee.find(params[:id])
+
+	@parties = @employee.parties
+
+	erb :"employees/show"
+
+end
 
 ########## FOOD FOOD FOOD ##############
 
@@ -200,13 +217,15 @@ end
 
 
 patch '/parties/:id/checkout' do 
+Pry.start(binding)
 
 party = Party.find(params[:id])
 
 party.update(
 			table_number: params[:party][:table_number], 
 		guests: params[:party][:guests],
-		paid: params[:party][:paid]
+		paid: params[:party][:paid],
+		tip: params[:party][:tip]
 						)
 redirect to '/parties'
 

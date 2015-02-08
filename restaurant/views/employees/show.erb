@@ -1,0 +1,27 @@
+<h1><%= @employee.name %></h1>
+
+<h2> Your Current Table(s):</h2>
+
+<% if @parties != [] %>
+
+	<% @parties.each do |party| %>
+
+		<% if party.paid == false %>
+			<h3>Table Number: <%=party.table_number %></h3> 
+				<p>Guests: <%= party.guests %></p> 
+				<p>Paid? <%= party.paid %></p> 
+
+		<% elsif party.paid == true %>
+
+			<h2>Tips: $<%= (party.foods.sum(:price) * party.tip)/100.0  %>0</h2>
+		
+		<% end %>
+		
+	<% end %>
+
+<% else %>
+	
+		<p>You are currently not serving any tables.</p> 
+		<p><a href="/parties/new">Start a new table</a></p>
+
+<% end %>
