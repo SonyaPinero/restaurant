@@ -6,6 +6,11 @@ Dir["../models/*.rb"].each do |file|
   require_relative file
 end
 
+ActiveRecord::Base.establish_connection(
+ adapter: :postgresql,
+ database: :restaurant
+)
+
 db=PG.connect( dbname: 'restaurant')
 
 init_foods = <<-SQL
