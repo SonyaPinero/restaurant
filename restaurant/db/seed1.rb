@@ -15,8 +15,8 @@ init_foods = <<-SQL
         name text NOT NULL,
         price int NOT NULL,
         allergens text,
-        created_at TIMESTAMP CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP CURRENT_TIMESTAMP
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
         )
         SQL
 
@@ -25,8 +25,8 @@ init_orders = <<-SQL
         id SERIAL PRIMARY KEY,
         food_id INT,
         party_id INT,
-        created_at TIMESTAMP CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP CURRENT_TIMESTAMP
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
         )
         SQL
 
@@ -38,8 +38,8 @@ init_parties = <<-SQL
         paid BOOLEAN DEFAULT false,
         tip INT,
         employee_id INT,
-        created_at TIMESTAMP CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP CURRENT_TIMESTAMP
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
         )
         SQL
 
@@ -47,8 +47,8 @@ init_employees = <<-SQL
     CREATE TABLE employees(
         id SERIAL PRIMARY KEY,
         name text NOT NULL,
-        created_at TIMESTAMP CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP CURRENT_TIMESTAMP
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
         )
         SQL
 
