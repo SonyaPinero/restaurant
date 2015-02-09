@@ -13,7 +13,7 @@ get '/' do
 
 	@current_parties = Party.all 
 
-	erb :index
+erb :index
 
 end 
 
@@ -344,6 +344,15 @@ party_id = old_order.party_id
 old_order.destroy 
 
 redirect to "/parties/#{party_id}" 
+
+end
+
+
+get '/receipts' do
+
+	@parties = Party.where(paid:true)
+
+	erb :"receipts/show"
 
 end
 

@@ -1,14 +1,28 @@
 <html>
   <head>
     <title>Tex-Mex NYC</title>
-    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <header>
     </header>
-    <main>
+      <nav>
+        <ul>
+          <li><a href="/employees/login">Sign In</a></li>
+          <li><a href="/employees">Our Staff</a></li>
+          <li><a href="/foods">Our Menu</a></li>
+          <li><a href="/parties">Current Parties</a></li>
+          <li><a href="/parties/new">New Party</a></li>
+        </ul>
+      </nav>
+
+      <div id="image">
+          <img src="https://uproxx.files.wordpress.com/2013/12/mexican.jpg?w=650">
+      </div>
+
       <%= yield %>
-    </main>
+  
     <footer>
     </footer>
   </body>

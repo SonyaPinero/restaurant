@@ -1,0 +1,9 @@
+<h1>Our Receipts</h1>
+<p>(Mind your fucking buisness, pinche puto IRS!!!!)</p>
+
+<% @parties.each do |party| %>
+		
+	<p>Party closed: <%= party.updated_at %> </p>
+	<p>Total: $<%= ((party.foods.sum(:price) * party.tip)/100.0) + party.foods.sum(:price) %>0</p>
+
+	<% end %>
