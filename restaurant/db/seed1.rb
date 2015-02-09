@@ -52,6 +52,16 @@ init_employees = <<-SQL
         )
         SQL
 
+db.exec("DROP TABLE IF EXISTS foods")
+db.exec("DROP TABLE IF EXISTS orders")
+db.exec("DROP TABLE IF EXISTS parties")
+db.exec("DROP TABLE IF EXISTS employees")
+
+db.exec(init_foods)
+db.exec(init_orders)
+db.exec(init_parties)
+db.exec(init_employees)
+
 #Create some heroes
 [
   {
@@ -210,12 +220,3 @@ end
 end
 
 
-db.exec("DROP TABLE IF EXISTS foods")
-db.exec("DROP TABLE IF EXISTS orders")
-db.exec("DROP TABLE IF EXISTS parties")
-db.exec("DROP TABLE IF EXISTS employees")
-
-db.exec(init_foods)
-db.exec(init_orders)
-db.exec(init_parties)
-db.exec(init_employees)
