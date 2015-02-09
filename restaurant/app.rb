@@ -6,6 +6,8 @@ end
 class Restaurant < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
+enable :sessions 
+
 
 get '/' do 
 
@@ -15,7 +17,13 @@ get '/' do
 
 end 
 
+
+
+
 ########## WORK WORK WORK ##############
+
+
+
 
 get '/employees' do
 
@@ -25,7 +33,31 @@ get '/employees' do
 
 end 
 
+
+
+get '/employees/login' do
+
+	@employees = Employee.all
+
+	erb :"employees/login"
+
+end 
+
+
+post '/employees/login' do
+
+	employee_id = params[:employee][:id]
+
+	session[:employee_id] = params[:employee][:id]
+
+	redirect to "/employees/#{employee_id}" 
+
+end
+
+
 get '/employees/:id' do
+
+	session[:employee_id] = params[:id]
 
 	@employee = Employee.find(params[:id])
 
@@ -34,6 +66,9 @@ get '/employees/:id' do
 	erb :"employees/show"
 
 end
+
+
+
 
 ########## FOOD FOOD FOOD ##############
 
@@ -142,9 +177,11 @@ end
 
 post '/parties'	do
 
-@new_party = Party.create(params[:party])
+	params[:party][:employee_id] = session[:employee_id] 
 
-redirect to '/parties'
+	@new_party = Party.create(params[:party])
+
+	redirect to '/parties'
 
 end
 
@@ -217,7 +254,6 @@ end
 
 
 patch '/parties/:id/checkout' do 
-Pry.start(binding)
 
 party = Party.find(params[:id])
 

@@ -1,0 +1,14 @@
+<h1>Please select your name </h1>
+
+<form action="/employees/login" method="POST">
+
+Name: <select name="employee[id]">
+	<% @employees.each do |employee| %>
+		<option value="<%= employee.id %>"><%= employee.name %></option>
+    <% end %>
+	</select><br>
+		<input type="submit" value="Submit">
+
+</form>
+
+

@@ -11,14 +11,23 @@
 				<p>Guests: <%= party.guests %></p> 
 				<p>Paid? <%= party.paid %></p> 
 
+		<p><a href="/parties/new">Start a new table</a></p>
 		<% elsif party.paid == true %>
 
-			<h2>Tips: $<%= (party.foods.sum(:price) * party.tip)/100.0  %>0</h2>
+			<% @total = [] %> 
+			<% 	@total << (party.foods.sum(:price) * party.tip)/100.0 %>
+			
+				<% @sum = 0 %>
+				<% @total.each do |i| %>
+				<%   @sum += i %>
+				<% end %>
 		
-		<% end %>
+					<h2>Tips Per Party: $<%= @sum  %>0</h2>
 		
-	<% end %>
+		<% end %>							
 
+	<% end %>
+			
 <% else %>
 	
 		<p>You are currently not serving any tables.</p> 
