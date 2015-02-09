@@ -6,7 +6,7 @@ Dir["../models/*.rb"].each do |file|
   require_relative file
 end
 
-db=PG.connect ( dbname: 'restaurant')
+db=PG.connect( dbname: 'restaurant')
 
 init_foods = <<-SQL
     CREATE TABLE foods(
