@@ -46,7 +46,7 @@ ActiveRecord::Base.establish_connection(
         SQL
 
 <<-SQL
-    CREATE TABLE employees (
+    CREATE TABLE employees(
         id SERIAL PRIMARY KEY,
         name text NOT NULL,
         created_at TIMESTAMP CURRENT_TIMESTAMP,
@@ -57,39 +57,39 @@ ActiveRecord::Base.establish_connection(
 #Create some heroes
 [
   {
-    cuisine: "Tex-Mex",
-    name: "Chimichanga",
-    allergens: "Gluten",
+    cuisine: 'Tex-Mex',
+    name: 'Chimichanga',
+    allergens: 'Gluten',
     price: 7
   },
   {
-    cuisine: "Tex-Mex",
-    name: "Chile Con Carne",
-    allergens: "Gluten",
+    cuisine: 'Tex-Mex',
+    name: 'Chile Con Carne',
+    allergens: 'Gluten',
     price: 5
   },
   {
-    cuisine: "Tex-Mex",
-    name: "Beef Tacos",
-    allergens: "Gluten",
+    cuisine: 'Tex-Mex',
+    name: 'Beef Tacos',
+    allergens: 'Gluten',
     price: 6
   },
   {
-    cuisine: "Tex-Mex",
-    name: "Enchiladas",
-    allergens: "Lactose",
+    cuisine: 'Tex-Mex',
+    name: 'Enchiladas',
+    allergens: 'Lactose',
     price: 5
   },
   {
-    cuisine: "Tex-Mex",
-    name: "Fajitas",
-    allergens: "Gluten",
+    cuisine: 'Tex-Mex',
+    name: 'Fajitas',
+    allergens: 'Gluten',
     price: 7
   },
   {
-    cuisine: "Tex-Mex",
-    name: "Quesadilla",
-    allergens: "Lactose",
+    cuisine: 'Tex-Mex',
+    name: 'Quesadilla',
+    allergens: 'Lactose',
     price: 5
   }
 ].each do |food|
