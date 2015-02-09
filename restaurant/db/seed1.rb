@@ -6,12 +6,9 @@ Dir["../models/*.rb"].each do |file|
   require_relative file
 end
 
-ActiveRecord::Base.establish_connection(
- adapter: :postgresql,
- database: :restaurant
-)
+db=PG.connect ( dbname: 'restaurant')
 
-<<-SQL
+init_foods = <<-SQL
     CREATE TABLE foods(
         id SERIAL PRIMARY KEY,
         cuisine text NOT NULL,
@@ -22,7 +19,8 @@ ActiveRecord::Base.establish_connection(
         updated_at TIMESTAMP CURRENT_TIMESTAMP
         )
         SQL
-<<-SQL
+
+init_orders = <<-SQL
     CREATE TABLE orders(
         id SERIAL PRIMARY KEY,
         food_id INT,
@@ -32,7 +30,7 @@ ActiveRecord::Base.establish_connection(
         )
         SQL
 
-<<-SQL
+init_parties = <<-SQL
     CREATE TABLE parties(
         id SERIAL PRIMARY KEY,
         table_number INT NOT NULL,
@@ -45,7 +43,7 @@ ActiveRecord::Base.establish_connection(
         )
         SQL
 
-<<-SQL
+init_employees = <<-SQL
     CREATE TABLE employees(
         id SERIAL PRIMARY KEY,
         name text NOT NULL,
@@ -216,3 +214,8 @@ db.exec("DROP TABLE IF EXISTS foods")
 db.exec("DROP TABLE IF EXISTS orders")
 db.exec("DROP TABLE IF EXISTS parties")
 db.exec("DROP TABLE IF EXISTS employees")
+
+db.exec(init_foods)
+db.exec(init_orders)
+db.exec(init_parties)
+db.exec(init_employees)
