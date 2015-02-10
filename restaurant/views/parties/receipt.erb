@@ -12,7 +12,9 @@
 
 <h2>Total: £<%= @total %></h2>
 
-<form action="/parties/<%= @party.id %>/checkout">
+<form action="/parties/<%= @party.id %>/checkout" method="POST">
+	<input type="hidden" name="_method" value="PATCH">
+	<input type="hidden" name="party[paid]" value="1">
 Suggested Tip: <select name="party[tip]">
       <option value="15">15%</option>
   		<option value="20">20%</option>

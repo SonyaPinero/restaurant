@@ -246,31 +246,22 @@ get '/parties/:id/receipt' do
 end
 
 
-get '/parties/:id/checkout' do
+# get '/parties/:id/checkout' do
 
-	session[:party_tip] = params[:party][:tip]
-	
-	@party = Party.find(params[:id])
+# 	session[:party_tip] = params[:party][:tip]
 
-	erb :"parties/checkout"
+# 	@party = Party.find(params[:id])
 
-end
+# 	erb :"parties/checkout"
+
+# end
 
 
 patch '/parties/:id/checkout' do 
-
-	party_tip = params[:party][:tip]
-
 	party = Party.find(params[:id])
+	party.update(params[:party])
 
-	party.update(
-			table_number: params[:party][:table_number], 
-			guests: params[:party][:guests],
-			paid: params[:party][:paid],
-			tip: party_tip
-						)
 	redirect to '/parties'
-
 end 
 
 
