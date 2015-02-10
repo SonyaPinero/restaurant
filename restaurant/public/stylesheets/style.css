@@ -1,18 +1,47 @@
+* {
+	margin: 0;
+}
+
 body { 
 	font-family: 'Alegreya Sans SC', sans-serif;
 	color: red;
 	text-align: center;
 	background-image: url("DashBlogHeader.png");
-	background-position: center center;
+	background-size: 100%;
+	background-position: 0 60px;
 	background-repeat: no-repeat;
 	background-color: black;
+}
+
+nav {
+	background-color: navy;
+	padding: 12px 0;
+}
+
+h1 {
+	background-color: darkgreen;
 }
 
 h1, h2, h3 {
 	font:red;
 }
 
-li { display: inline; padding-right: 20px;
+h3 {
+	font-size: 30px;
+}
+
+li { 
+		display: inline; padding-right: 20px;
 		font-size: 30px ;
 		color: red;
 }
+
+.foods {
+	text-align: center;
+	font-size: 30px;
+}
+
+.white {
+	background-color: white;
+}
+

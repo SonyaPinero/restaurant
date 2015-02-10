@@ -2,18 +2,13 @@
 	
 	<% @foods.each do |food| %>
 
+<div class="foods">
 <h3><a href="/foods/<%= food.id %>"> <%= food.name %></a></h3>
+	
+	Cuisine: <%= food.cuisine %><br>
+	Allergens: <%= food.allergens %><br>
+	Price: £<%= food.price %><br>
 
-<ul>	
-	<li>
-	Cuisine: <%= food.cuisine %>
-	</li>
-	<li>
-	Allergens: <%= food.allergens %>
-	</li>
-	<li>
-	Price: $<%= food.price %>
-	</li>
-</ul>
+</div>
 
 <% end %>

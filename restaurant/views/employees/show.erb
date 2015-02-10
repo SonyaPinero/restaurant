@@ -3,7 +3,7 @@
 <h2> Your Current Table(s):</h2>
 
 <% if @parties != [] %>
-
+		<% sum = 0 %>
 	<% @parties.each do |party| %>
 
 		<% if party.paid == false %>
@@ -14,12 +14,14 @@
 		<p><a href="/parties/new">Start a new table</a></p>
 		<% elsif party.paid == true %>
 
-			<h2>Tips Per Party: $<%= (party.foods.sum(:price) * party.tip)/100.0 %>0 </h2>
+			<% sum += (party.foods.sum(:price) * party.tip)/100.0 %> 
 		
 		<% end %>						
 
 	<% end %>
 			
+			<h2>Total Tips: £<%= sum %>0 </h2>
+
 <% else %>
 	
 		<p>You are currently not serving any tables.</p> 

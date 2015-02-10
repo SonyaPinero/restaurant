@@ -208,23 +208,23 @@ end
 	
 patch '/parties/:id' do
 
-party = Party.find(params[:id])
+	party = Party.find(params[:id])
   	
-  party.update(
+  	party.update(
   		table_number: params[:party][:table_number], 
-		guests: params[:party][:guests],
-		paid: params[:party][:paid]
+			guests: params[:party][:guests],
+			paid: params[:party][:paid]
 						)
 
-redirect to "/parties/#{party.id}"
+	redirect to "/parties/#{party.id}"
 
 end
 
 
 delete	'/parties/:id' do	
 
-party = Party.find(params[:id])
-  party.destroy
+	party = Party.find(params[:id])
+  	party.destroy
 
   redirect to '/parties'
 
@@ -233,37 +233,37 @@ end
 
 get '/parties/:id/receipt' do 
 
-@party = Party.find(params[:id])
+	@party = Party.find(params[:id])
 
-@foods = @party.foods
+	@foods = @party.foods
 
-@total = @foods.sum(:price)
+	@total = @foods.sum(:price)
 
-erb :"parties/receipt"
+	erb :"parties/receipt"
 
 end
 
 
 get '/parties/:id/checkout' do
 
-@party = Party.find(params[:id])
+	@party = Party.find(params[:id])
 
-erb :"parties/checkout"
+	erb :"parties/checkout"
 
 end
 
 
 patch '/parties/:id/checkout' do 
 
-party = Party.find(params[:id])
+	party = Party.find(params[:id])
 
-party.update(
+	party.update(
 			table_number: params[:party][:table_number], 
-		guests: params[:party][:guests],
-		paid: params[:party][:paid],
-		tip: params[:party][:tip]
+			guests: params[:party][:guests],
+			paid: params[:party][:paid],
+			tip: params[:party][:tip]
 						)
-redirect to '/parties'
+	redirect to '/parties'
 
 end 
 
@@ -277,57 +277,57 @@ end
 
 get '/orders/new' do 
 
-@foods = Food.all
+	@foods = Food.all
 
-@parties = Party.all
+	@parties = Party.all
 
-erb :"order/new"
+	erb :"order/new"
 
 end
 
 
 post '/orders' do 
 
-food_id = params[:food][:id]
-party_id = params[:party][:id]
+	food_id = params[:food][:id]
+	party_id = params[:party][:id]
 
-new_order = Order.create(
-	food_id: food_id,
-	party_id: party_id
+	new_order = Order.create(
+		food_id: food_id,
+		party_id: party_id
 				)
 
-redirect to "/parties/#{party_id}" 
+	redirect to "/parties/#{party_id}" 
 
 end
 
 
 get '/orders/:id/edit' do 
 
-@order_id = params[:id]
+	@order_id = params[:id]
 
-order = Order.find_by(id: params[:id])
+	order = Order.find_by(id: params[:id])
 
-party_id = order.party_id 
+	party_id = order.party_id 
 
-@party_foods = Party.find(party_id).foods
-@table_number = Party.find(party_id).table_number
+	@party_foods = Party.find(party_id).foods
+	@table_number = Party.find(party_id).table_number
 
-erb :"order/edit"
+	erb :"order/edit"
 
 end 
 
 
 patch '/orders/:id' do
 
-food_id = params[:food][:id]
+	food_id = params[:food][:id]
 
-old_order = Order.find_by(id: params[:id])
+	old_order = Order.find_by(id: params[:id])
 
-party_id = old_order.party_id
+	party_id = old_order.party_id
 
-new_order = old_order.update(
-	food_id: food_id,
-	party_id: party_id
+	new_order = old_order.update(
+		food_id: food_id,
+		party_id: party_id
 				)
 
 redirect to "/parties/#{party_id}" 
@@ -337,13 +337,13 @@ end
 
 delete '/orders/:id' do 
 
-old_order = Order.find(params[:id])
+	old_order = Order.find(params[:id])
 
-party_id = old_order.party_id
+	party_id = old_order.party_id
 
-old_order.destroy 
+	old_order.destroy 
 
-redirect to "/parties/#{party_id}" 
+	redirect to "/parties/#{party_id}" 
 
 end
 

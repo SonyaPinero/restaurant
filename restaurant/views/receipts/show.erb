@@ -4,6 +4,6 @@
 <% @parties.each do |party| %>
 		
 	<p>Party closed: <%= party.updated_at %> </p>
-	<p>Total: $<%= ((party.foods.sum(:price) * party.tip)/100.0) + party.foods.sum(:price) %>0</p>
+	<p>Total: £<%= ((party.foods.sum(:price) * party.tip)/100.0) + party.foods.sum(:price) %>0</p>
 
 	<% end %>
