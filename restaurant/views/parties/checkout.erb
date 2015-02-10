@@ -1,4 +1,4 @@
-<h2> Checkout for Table Number <%= @party.table_number %></h2>
+<h1> Checkout for Table Number <%= @party.table_number %></h1>
 
 <form action="/parties/<%= @party.id %>/checkout" method="POST">
   Table Number: <input type="number" name="party[table_number]" value="<%= @party.table_number %>"><br>

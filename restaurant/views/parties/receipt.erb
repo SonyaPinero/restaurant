@@ -5,17 +5,18 @@
 <% @foods.each do |food| %>
 
 <h3><%= food.name %></h3>
-$<%= food.price %>
+£<%= food.price %>
 
 <% end %>
 
 
 <h2>Total: £<%= @total %></h2>
 
+<form action="/parties/<%= @party.id %>/checkout">
 Suggested Tip: <select name="party[tip]">
-      <option value="<%= @party.tip %>">15%</option>
-  		<option value="<%= @party.tip %>">20%</option>
-  		<option value="<%= @party.tip %>">25%</option>
+      <option value="15">15%</option>
+  		<option value="20">20%</option>
+  		<option value="25">25%</option>
   </select><br>
-
-<a href="/parties/<%= @party.id %>/checkout"> Click here to checkout </a>
+  <input type="submit" name="Click here to checkout" />
+</form>

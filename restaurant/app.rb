@@ -11,7 +11,7 @@ enable :sessions
 
 get '/' do 
 
-	@current_parties = Party.all 
+	@current_parties = Party.where(paid: false) 
 
 erb :index
 
@@ -188,6 +188,8 @@ end
 
 get '/parties/:id' do 
 
+	session[:party_id] = params[:id]
+
 	@party = Party.find(params[:id])
 
 	@order = Order.where(party_id: @party.id).first
@@ -246,6 +248,8 @@ end
 
 get '/parties/:id/checkout' do
 
+	session[:party_tip] = params[:party][:tip]
+	
 	@party = Party.find(params[:id])
 
 	erb :"parties/checkout"
@@ -255,13 +259,15 @@ end
 
 patch '/parties/:id/checkout' do 
 
+	party_tip = params[:party][:tip]
+
 	party = Party.find(params[:id])
 
 	party.update(
 			table_number: params[:party][:table_number], 
 			guests: params[:party][:guests],
 			paid: params[:party][:paid],
-			tip: params[:party][:tip]
+			tip: party_tip
 						)
 	redirect to '/parties'
 
@@ -277,9 +283,13 @@ end
 
 get '/orders/new' do 
 
+	party_id = session[:party_id]
+
 	@foods = Food.all
 
-	@parties = Party.all
+	@party = Party.find(party_id)
+
+	# @parties = Party.all
 
 	erb :"order/new"
 
