@@ -1,3 +1,5 @@
+require_relative 'environment'
+
 #\ -p 3000
 
 # Make sure we load all the gems
@@ -10,7 +12,15 @@ set :database, {
   host: "localhost", port: 5432
 }
 
-use Rack::MethodOverride 
+map('/employees') { run EmployeesController }
+map('/foods') { run FoodsController }
+map('/orders') { run OrdersController }
+map('/parties') { run PartiesController }
+map('/receipts') { run ReceiptsController }
+map('/') { run SimpleAuthController }
+
+
+run Sinatra::Application
 
 require './app'
 run Restaurant

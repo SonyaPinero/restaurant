@@ -1,0 +1,19 @@
+<h1>Welcome, existing employee!  Log in below.</h1>
+
+<% @employee.errors.full_messages.each do |message| %>
+  <p class="error"><%= message %></p>
+<% end %>
+
+<form action="/login" method="post">
+  <fieldset>
+    <label for="employee_name">Your name</label>
+    <input type="text" id="employee_name" name="employee[name]" value="<%= @employee.name %>">
+  </fieldset>
+
+  <fieldset>
+    <label for="employee_password">Password</label>
+    <input type="password" id="employee_password" name="employee[password]">
+  </fieldset>
+
+  <input type="submit" value="Log in">
+</form>
